@@ -1,18 +1,21 @@
-from math import log2
 import operator as op
+from math import log2
 
 
 class Symbols:
     def __init__(self, value: str, ind: int = 0):
         self.value = value
         self.ec = ''
-        self._ind = ind
+        self.ind = ind
 
     def extend_ec(self, new_ec: str = "-1"):
         self.ec += new_ec
 
     def get_index(self):
-        return self._ind
+        return self.ind
+
+    def reduce_index(self):
+        self.ind -= 1
 
 
 def extended_string(text: str):
@@ -26,13 +29,17 @@ def assign_indices(text: str):
     return list(map(list, enumerate(text)))
 
 
+def reduce_indices(arr: list[Symbols]):
+    for symbol in arr:
+        symbol.reduce_index()
+
+
 def main_func(text: str):
     extended_text = extended_string(text)
     main_arr = [Symbols(letter, ind) for ind, letter in enumerate(extended_text)]
 
     get_letter = op.attrgetter("value")
     main_arr.sort(key=lambda symbol: get_letter(symbol))
-
 
 
 def input_func(file_name):
