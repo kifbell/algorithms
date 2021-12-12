@@ -70,9 +70,8 @@ def reset_ec(arr: list[Symbols], ec_store):
     return ec_store
 
 
-def get_suffix_array(text: str):
+def get_suffix_array(text):
     get_letter = op.attrgetter("value")
-    text = 'abcdabc'
 
     extended_text = extended_string(text)
     main_arr = [Symbols(letter, ind) for ind, letter in enumerate(extended_text)]
@@ -119,7 +118,7 @@ def output_patterns(patterns: list):
     upgraded_str = lambda index: str(index + 1)
     for pattern_nubmer, _, start_indices in patterns:
         if start_indices:
-            print(f"{pattern_nubmer}: {','.join(list(map(upgraded_str, start_indices)))}")
+            print(f"{pattern_nubmer}: {', '.join(list(map(upgraded_str, start_indices)))}")
 
 
 if __name__ == "__main__":
