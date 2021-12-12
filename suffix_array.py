@@ -5,7 +5,7 @@ from math import log2
 
 
 class Symbols:
-    def __init__(self, value: str, ind: int = 0):
+    def __init__(self, value, ind = 0):
         self.value = value
         self.ec = ''
         self.ind = ind
@@ -20,32 +20,32 @@ class Symbols:
         self.ind -= 1
 
 
-def extended_string(text: str):
+def extended_string(text):
     text_len = len(text)
     log_len = log2(text_len)
     expected_len = 2 ** [int(log_len) + 1, int(log_len)][int(log_len) == log_len]
     return text + "$" * (expected_len - text_len)
 
 
-def reduce_indices(arr: list[Symbols]):
+def reduce_indices(arr):
     max_ind = len(arr)
     ind_reduction = len(arr[0].value)
     for symbol in arr:
         symbol.ind = (symbol.ind - ind_reduction) % max_ind
 
 
-def assign_symbols_by_ind(text: str, arr: list[Symbols]):
+def assign_symbols_by_ind(text, arr):
     text *= 2
     for symbol in arr:
         symbol.value = text[symbol.ind: symbol.ind + 2 * len(symbol.value)]
 
 
-def upgrade_ec(arr: list[Symbols], ec_store):
+def upgrade_ec(arr, ec_store):
     for symbol in arr:
         symbol.ec = ec_store[symbol.value[:len(symbol.value) // 2]] + str(symbol.ec)
 
 
-def initiate_ec(arr: list[Symbols]):
+def initiate_ec(arr):
     ec_cnt = 0
     passed_value = str(arr[0].value)
     ec_store = dict()
@@ -58,7 +58,7 @@ def initiate_ec(arr: list[Symbols]):
     return ec_store
 
 
-def reset_ec(arr: list[Symbols], ec_store):
+def reset_ec(arr, ec_store):
     ec_cnt = 0
     passed_ec = str(arr[0].ec)
     for symbol in arr:
@@ -102,7 +102,7 @@ def input_func(file_name):
         return text, [pattern_line.strip() for pattern_line in stream.readlines()]
 
 
-def find_patterns(suffix_array: list[Symbols], patterns: list[str]):
+def find_patterns(suffix_array, patterns):
     ans = list()
     for i, pattern in enumerate(patterns):
         this_pattern = list()
@@ -114,7 +114,7 @@ def find_patterns(suffix_array: list[Symbols], patterns: list[str]):
     return ans
 
 
-def output_patterns(patterns: list):
+def output_patterns(patterns):
     upgraded_str = lambda index: str(index + 1)
     for pattern_nubmer, _, start_indices in patterns:
         if start_indices:
