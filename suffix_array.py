@@ -1,23 +1,15 @@
 import operator as op
-from typing import List
-
 from math import log2
 
 
 class Symbols:
-    def __init__(self, value, ind = 0):
+    def __init__(self, value, ind=0):
         self.value = value
         self.ec = ''
         self.ind = ind
 
     def extend_ec(self, new_ec: str = "-1"):
         self.ec += new_ec
-
-    def get_index(self):
-        return self.ind
-
-    def reduce_index(self):
-        self.ind -= 1
 
 
 def extended_string(text):
@@ -88,12 +80,11 @@ def get_suffix_array(text):
         upgrade_ec(main_arr, ec_storage)
         ec_storage = reset_ec(main_arr, ec_storage)
 
-        # for symbol in main_arr:
-        #     print(f"{symbol.value}: ec: {symbol.ec}, start ind: {symbol.ind}")
-        # print()
+        for symbol in main_arr:
+            print(f"{symbol.value}: ec: {symbol.ec}, start ind: {symbol.ind}")
+        print()
 
     return main_arr
-    # print(ec_storage)
 
 
 def input_func(file_name):
